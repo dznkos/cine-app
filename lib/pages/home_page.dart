@@ -30,6 +30,9 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _swipeTarjetas() {
+
+    final peliculasProvider = new PeliculasProvider();
+
     return CardSwiper(
       peliculas: [1,2,3,4,5],
     );
