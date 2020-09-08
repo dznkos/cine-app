@@ -28,7 +28,7 @@ class Pelicula {
   String originalTitle;
   List<int> genreIds;
   String title;
-  int voteAverage;
+  dynamic voteAverage;
   String overview;
   String releaseDate;
 
@@ -61,7 +61,7 @@ class Pelicula {
     originalTitle     = json['original_title'];
     genreIds          = json['genre_ids'].cast<int>();
     title             = json['title'];
-    voteAverage       = json['vote_average'] / 1;
+    voteAverage       = json['vote_average'];
     overview          = json['overview'];
     releaseDate       = json['release_date'];
   }
