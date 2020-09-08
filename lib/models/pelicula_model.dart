@@ -66,4 +66,13 @@ class Pelicula {
     releaseDate       = json['release_date'];
   }
 
+  getPosterImg() {
+    if ( posterPath == null) {
+      return 'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png';
+    }
+    else {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
+
 }
