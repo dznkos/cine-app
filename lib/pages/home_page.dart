@@ -5,6 +5,7 @@ import 'package:peliculas/models/pelicula_model.dart';
 import 'package:peliculas/providers/peliculas_provider.dart';
 
 import 'package:peliculas/widgets/card_swiper_widget.dart';
+import 'package:peliculas/widgets/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
 
@@ -27,10 +28,12 @@ class HomePage extends StatelessWidget {
       ),
       
       body: Container(
-          padding: EdgeInsets.all(25.0) ,
+          padding: EdgeInsets.all(10.0) ,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _swipeTarjetas(),
+              _footer(context),
             ],
           )
       ),
@@ -59,4 +62,33 @@ class HomePage extends StatelessWidget {
     );
 
   }
+
+  Widget _footer(BuildContext context){
+
+    return Container(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+                padding: EdgeInsets.only(left: 20.0),
+                child: Text('Populares', style: Theme.of(context).textTheme.subtitle2)),
+            SizedBox( height: 5.0,),
+            FutureBuilder(
+                future: peliculasProvider.getPopulares(),
+                builder: (context,AsyncSnapshot<List> snapshot) {
+                  if ( snapshot.hasData ){
+                    return MovieHorizontal(peliculas: snapshot.data);
+                  }else{
+                    return Center(
+                        child: CircularProgressIndicator()
+                    );
+                  }
+                },)
+          ],
+        ),
+    );
+
+  }
+
 }
