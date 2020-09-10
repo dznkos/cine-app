@@ -17,7 +17,7 @@ class PeliculasProvider {
   final _popularesSteamController = new StreamController<List<Pelicula>>.broadcast();
 
   //Sink utilizado para agregar informacion al Stream
-  Function<List<Pelicula>> get popularesSink => _popularesSteamController.sink.add;
+  Function(List<Pelicula>) get popularesSink => _popularesSteamController.sink.add;
   //Stream utilizado para obtener estado y informacion del Stream
   Stream<List<Pelicula>> get popularesStream => _popularesSteamController.stream;
 
