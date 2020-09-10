@@ -75,7 +75,11 @@ class HomePage extends StatelessWidget {
           children: [
             Container(
                 padding: EdgeInsets.only(left: 20.0),
-                child: Text('Populares', style: Theme.of(context).textTheme.subtitle2)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                    child: Text('Populares', style: Theme.of(context).textTheme.subtitle2)
+                )
+            ),
             SizedBox( height: 5.0,),
 
             StreamBuilder(
