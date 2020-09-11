@@ -44,11 +44,12 @@ class PeliculasProvider {
     return await _procesoRespuesta(url);
   }
 
-  Future<List<Pelicula>> getPopulares() async {
+Future<List<Pelicula>> getPopulares() async {
 
     if ( _cargandoPagina ) return [];
 
     _cargandoPagina = true;
+    print('Cargando Pagina');
 
     _popularesPage++;
     final url = Uri.https(_url, '3/movie/popular', {
