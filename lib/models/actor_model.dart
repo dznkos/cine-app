@@ -1,3 +1,17 @@
+class Cast {
+  List<Actor> actores = new List();
+
+  Cast.fromJsonList(List<dynamic> jsonList){
+
+    if ( jsonList == null ) return;
+    jsonList.forEach(( p )
+    {
+      final actor = Actor.fromJsonMap( p );
+      actores.add(actor);
+    });
+  }
+}
+
 
 class Actor {
   int castId;
@@ -31,7 +45,7 @@ class Actor {
     profilePath = json['profile_path'];
   }
 
-  getPosterImg() {
+  getFoto() {
     if ( profilePath == null) {
       return 'https://bizraise.pro/wp-content/uploads/2014/09/no-avatar-300x300.png';
     }
