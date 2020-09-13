@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
 
 class DataSearch extends SearchDelegate{
+
+  String seleccion = '';
+
+  final peliculas = [
+    'Avengers',
+    'Conjuro 2',
+    'Hulk',
+    'Spiderman',
+    'Transformers',
+    'Iron Man 1',
+    'Iron Man 2',
+    'Iron Man 3',
+    'Iron Man 4',
+  ];
+
+  final peliculasRecientes = [
+    'Wall-e',
+    'Shazam',
+    'Capitan America'
+  ];
+
   @override
   List<Widget> buildActions(BuildContext context) {
     // las acciones de nuestro AppBar
@@ -12,8 +33,6 @@ class DataSearch extends SearchDelegate{
         },
       )
     ];
-
-    throw UnimplementedError();
   }
 
   @override
@@ -29,24 +48,47 @@ class DataSearch extends SearchDelegate{
             progress: transitionAnimation),
     );
 
-    throw UnimplementedError();
   }
 
   @override
   Widget buildResults(BuildContext context) {
     // crea los resultamos que vamos a mostrar
 
-    return Container();
+    return Center(
+      child: Container(
+        width: 200,
+        height: 200,
+        color: Colors.blueAccent,
+        child: Text(seleccion),
+      ),
+    );
 
-    throw UnimplementedError();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // son las sugerencias que aparecen cuando la persona escribe
-    return Container();
 
-    throw UnimplementedError();
+    final listaSugerida = ( query.isEmpty )
+                          ? peliculasRecientes
+                          : peliculas.where((e) => e.toLowerCase().startsWith( query.toLowerCase())
+                          ).toList();
+
+    // son las sugerencias que aparecen cuando la persona escribe
+    return
+      ListView.builder(
+          itemCount: listaSugerida.length,
+          itemBuilder: (context, i) {
+            return ListTile(
+              leading: Icon( Icons.movie ),
+              title: Text( listaSugerida[i]),
+              onTap: () {
+                seleccion = listaSugerida[i];
+                showResults(context);
+              },
+            );
+          },
+      );
+
   }
 
 }
