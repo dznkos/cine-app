@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/models/pelicula_model.dart';
+import 'package:peliculas/providers/peliculas_provider.dart';
 
 class DataSearch extends SearchDelegate{
+
+  final peliculasProvider = new PeliculasProvider();
 
   String seleccion = '';
 
@@ -68,27 +72,72 @@ class DataSearch extends SearchDelegate{
   @override
   Widget buildSuggestions(BuildContext context) {
 
+    if ( query.isEmpty ){
+
+      return Container();
+    }
+
+    return FutureBuilder(
+        future: peliculasProvider.buscarPelicula(query),
+        builder: (context, AsyncSnapshot<List<Pelicula>> snapshot) {
+          if ( snapshot.hasData ){
+            final peliculas = snapshot.data;
+
+            return ListView(
+              children: peliculas.map( (pelicula) {
+                return ListTile(
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  leading: FadeInImage(
+                      placeholder: AssetImage('assets/no-image.jpg'),
+                      image: NetworkImage( pelicula.getPosterImg()),
+                      width: 50.0,
+                      fit: BoxFit.contain,
+                  ),
+                  title: Text( pelicula.title),
+                  subtitle: Text(pelicula.originalTitle),
+                  onTap: () {
+                    close(context, null);
+                    pelicula.uniqueId = '';
+                    Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+                  },
+                );
+              }).toList()
+            );
+
+          }else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+    );
+
+  }
+
+  /*@override
+  Widget buildSuggestions(BuildContext context) {
+
     final listaSugerida = ( query.isEmpty )
-                          ? peliculasRecientes
-                          : peliculas.where((e) => e.toLowerCase().startsWith( query.toLowerCase())
-                          ).toList();
+        ? peliculasRecientes
+        : peliculas.where((e) => e.toLowerCase().startsWith( query.toLowerCase())
+    ).toList();
 
     // son las sugerencias que aparecen cuando la persona escribe
     return
       ListView.builder(
-          itemCount: listaSugerida.length,
-          itemBuilder: (context, i) {
-            return ListTile(
-              leading: Icon( Icons.movie ),
-              title: Text( listaSugerida[i]),
-              onTap: () {
-                seleccion = listaSugerida[i];
-                showResults(context);
-              },
-            );
-          },
+        itemCount: listaSugerida.length,
+        itemBuilder: (context, i) {
+          return ListTile(
+            leading: Icon( Icons.movie ),
+            title: Text( listaSugerida[i]),
+            onTap: () {
+              seleccion = listaSugerida[i];
+              showResults(context);
+            },
+          );
+        },
       );
 
-  }
+  }*/
 
 }
