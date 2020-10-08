@@ -1,12 +1,9 @@
-# peliculas
+# Aplicacion Movie
+# peliculas APP
 
-Aplicacion Movie
-![home movies](https://i.ibb.co/zZdZVDg/pelicula.png)
-Detail 1
-![detalle movie](https://i.ibb.co/92syrD7/peliculas1.png)
-Detail 2
-![detalle2 movie](https://i.ibb.co/Q67KdjR/pelicula2.png)
-
+![](https://i.ibb.co/zZdZVDg/pelicula.png)
+![](https://i.ibb.co/92syrD7/peliculas1.png)
+![](https://i.ibb.co/Q67KdjR/pelicula2.png)
 
 ## Getting Started
 
