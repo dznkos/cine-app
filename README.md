@@ -1,5 +1,4 @@
-# Aplicacion Movie
-# peliculas APP
+# Movie APP
 
 ![](https://i.ibb.co/zZdZVDg/pelicula.png)
 ![](https://i.ibb.co/92syrD7/peliculas1.png)
